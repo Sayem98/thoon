@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./mainsection.css";
 import { useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
 import useContract from "../../hooks/useContracts";
-import { PER_USDT_TO_BNB, PER_DOLLAR_PRICE } from "../../contracts/contract";
+
 import ClipLoader from "react-spinners/ClipLoader";
 import toast from "react-hot-toast";
 
@@ -20,6 +20,7 @@ const MainSection = () => {
   let [color] = useState("#ffffff");
   const [data, setData] = useState(null);
   const [total, setTotal] = useState(0);
+  const [change, setChange] = useState(false);
 
   const { open } = useWeb3Modal();
   const { address, isConnected } = useWeb3ModalAccount();
@@ -45,7 +46,7 @@ const MainSection = () => {
       console.log(total);
     };
     if (address) _getData();
-  }, [address]);
+  }, [address, change]);
 
   useEffect(() => {
     setReceive(amount / 0.000139);
@@ -62,13 +63,11 @@ const MainSection = () => {
       await buy(amount, referral);
       setLoading(false);
       toast.success("Transaction successful");
-      window.location.reload();
+      setChange(!change);
     } catch (e) {
       console.log(e);
       setLoading(false);
       toast.error("Transaction failed");
-
-      window.location.reload();
     }
   };
 

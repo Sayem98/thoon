@@ -3,9 +3,6 @@ export const TOKEN_CONTRACT_ADDRESS =
 export const PRESALE_CONTRACT_ADDRESS =
   "0xc05AE68b2E7595816393AD5C288DCE7B829135Be";
 
-export const PER_DOLLAR_PRICE = 100;
-export const PER_USDT_TO_BNB = 526.6;
-
 export const TOKEN_ABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
