@@ -1,0 +1,142 @@
+.dZPFHi {
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 25px 0px;
+  transition: all 0.3s ease 0s;
+}
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 2rem 2rem 0 2rem;
+  width: 100%;
+}
+.dZPFHi .gittu-header-content {
+    padding: .3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dZPFHi .gittu-header-menu-toggle {
+  display: none;
+}
+.dZPFHi .gittu-header-right-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gittu-header-left {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.gittu-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dZPFHi .social-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dZPFHi .social-links li a {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease 0s;
+}
+.fctTn .connect-wallet-btn {
+  background: rgb(255, 255, 255);
+  color: rgb(17, 17, 17);
+}
+.fctTn .connect-wallet-btn {
+  border: 0px;
+  padding: 12px;
+  min-width: 185px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  font-family: Outfit, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: black;
+  background: rgb(255, 255, 255);
+  transition: all 0.3s ease 0s;
+}
+.dZPFHi .social-links li a:hover {
+  opacity: 0.7;
+}
+.menu-toggler {
+  border: 0px;
+  padding: 0px;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+}
+ 
+.menu-toggler {
+  display: none;
+  cursor: pointer;
+}
+
+.menu-content  {
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 85%;
+  position: fixed;
+  left: 0;
+   align-items: center;
+  justify-content: center;
+  background-color: rgb(27, 34, 38);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+   flex-direction: column;
+  gap: 2rem;
+}
+
+.whitepaper-link {
+  font-family: Outfit, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 40px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease 0s;
+}
+
+.menu-open {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-toggler {
+    display: block;
+  }
+  .dZPFHi .social-links {
+    display: none;
+    align-items: center;
+    gap: 20px;
+  }.jj{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}

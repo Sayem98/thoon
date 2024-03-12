@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kufam:ital,wght@0,400..900;1,400..900&family=Outfit:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+ 
+.eTbKOW {
+  background-image: url(https://launch.thoon.xyz/assets/banner8-bg-a5274ce7.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 223px 0px 0px;
+  min-height: 130vh;
+   position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.eTbKOW::before {
+  position: absolute;
+  z-index: -2;
+  content: "";
+  top: 70px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://launch.thoon.xyz/assets/banner8-boy-b918a8e7.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.eTbKOW::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://launch.thoon.xyz/assets/banner8-texture-23561e28.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+ul{
+  list-style: outside none none;
+  margin: 0px;
+  padding: 0px;
+}
