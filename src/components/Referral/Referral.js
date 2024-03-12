@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./referral.css";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 const Referral = () => {
+  const [referral, setReferral] = useState("");
+  const { address, isConnected } = useWeb3ModalAccount();
+  useEffect(() => {
+    if (isConnected) {
+      setReferral(`${window.location.origin}/?ref=${address}`);
+    }
+  }, [address]);
   return (
-    <div style={{padding:'.3rem'}}>
+    <div style={{ padding: ".3rem" }}>
       <div class="app-container   flex flex--column bg-color">
         <div
           class="app__data-container flex flex--column"
@@ -25,10 +33,26 @@ const Referral = () => {
               type="text"
               id="referLink"
               readonly=""
-              value="Please connect your wallet first"
+              // value with url + address
+              // get the url from the window.location.origin
+              value={referral}
             />
           </p>
-          <button class="btn" id="copyreflink">
+          <button
+            class="btn"
+            id="copyreflink"
+            onClick={() => {
+              if (isConnected) {
+                document.getElementById("referLink").select();
+                document.execCommand("copy");
+              } else {
+                document.getElementById("refErr").style.display = "block";
+              }
+            }}
+            style={{
+              cursor: isConnected ? "pointer" : "not-allowed",
+            }}
+          >
             Copy
           </button>
           <span></span>

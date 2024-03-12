@@ -1,7 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./mainsection.css";
+import { useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers/react";
+import useContract from "../../hooks/useContracts";
+import { PER_USDT_TO_BNB, PER_DOLLAR_PRICE } from "../../contracts/contract";
+import ClipLoader from "react-spinners/ClipLoader";
+import toast from "react-hot-toast";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const MainSection = () => {
+  const [referral, setReferral] = useState(null);
+  const [amount, setAmount] = useState(0);
+  const [receive, setReceive] = useState(0);
+  let [loading, setLoading] = useState(false);
+  let [color] = useState("#ffffff");
+  const [data, setData] = useState(null);
+  const [total, setTotal] = useState(0);
+
+  const { open } = useWeb3Modal();
+  const { address, isConnected } = useWeb3ModalAccount();
+  const { buy, getData, totalSold } = useContract();
+
+  useEffect(() => {
+    // get the referral from the url of no referral then set it to null
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+    if (ref) {
+      console.log(ref);
+      setReferral(ref);
+    }
+  }, []);
+
+  useEffect(() => {
+    const _getData = async () => {
+      const data = await getData();
+      setData(data);
+
+      const total = await totalSold();
+      setTotal(total * 0.000139);
+      console.log(total);
+    };
+    if (address) _getData();
+  }, [address]);
+
+  useEffect(() => {
+    setReceive(amount / 0.000139);
+  }, [amount]);
+
+  const handleBuy = async () => {
+    setLoading(true);
+    try {
+      if (amount < 0.034) {
+        toast.error("Minimum buy is 0.034 BNB");
+        setLoading(false);
+        return;
+      }
+      await buy(amount, referral);
+      setLoading(false);
+      toast.success("Transaction successful");
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+      toast.error("Transaction failed");
+
+      window.location.reload();
+    }
+  };
+
   return (
     <div className=" ">
       <div className="container">
@@ -49,7 +119,7 @@ const MainSection = () => {
                       class="progress-done"
                       cx="175"
                       cy="175"
-                      r="150"
+                      r={Number((total * 100) / 10000000).toFixed(2)}
                       stroke-linecap="round"
                     ></circle>
                   </svg>
@@ -60,14 +130,14 @@ const MainSection = () => {
                     />
                   </div>
                   <div class="progress-level">
-                    <h2>0.51%</h2>
+                    <h2>{Number((total * 100) / 10000000).toFixed(2)}%</h2>
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-between">
                 <div class="progress-info">
                   <h5>Raised</h5>
-                  <h5>50783</h5>
+                  <h5>{Number(total).toFixed(5)}</h5>
                 </div>
                 <div class="progress-info right">
                   <h5>Goal</h5>
@@ -140,19 +210,51 @@ const MainSection = () => {
                       <div class="presale-item mb-35">
                         <div class="presale-item-inner">
                           <label>Pay token (BNB)</label>
-                          <input type="number" placeholder="0" value="0" />
+                          <input
+                            type="number"
+                            placeholder="0"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                          />
                         </div>
                         <div class="presale-item-inner">
                           <label>Get Token ($Thoon)</label>
-                          <input type="number" placeholder="0" />
+                          <input
+                            type="number"
+                            placeholder="0"
+                            value={receive}
+                          />
                         </div>
                       </div>
                     </form>
                     <div class="presale-item-msg"></div>
                     <div variant="pay" class="sc-guDLey hKEsDZ">
-                      <button class="connect-wallet-btn">
-                        Connect <span>Wallet</span>
-                      </button>
+                      {isConnected ? (
+                        <button
+                          class="connect-wallet-btn"
+                          onClick={handleBuy}
+                          style={{
+                            cursor: loading ? "not-allowed" : "pointer",
+                          }}
+                        >
+                          {loading ? (
+                            <ClipLoader
+                              color={color}
+                              loading={loading}
+                              cssOverride={override}
+                              size={30}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                            />
+                          ) : (
+                            "Buy Thoon"
+                          )}
+                        </button>
+                      ) : (
+                        <button class="connect-wallet-btn" onClick={open}>
+                          Connect <span>Wallet</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

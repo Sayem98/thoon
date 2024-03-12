@@ -53,9 +53,10 @@ const Navbar = () => {
                 </li>
               </ul>
               <div variant="v6" className="sc-guDLey fctTn">
-                <button className="connect-wallet-btn">
+                {/* <button className="connect-wallet-btn">
                   Connect <span>Wallet</span>
-                </button>
+                </button> */}
+                <w3m-button />
               </div>
               <div
                 className={`menu-toggler ${isMenuOpen ? "menu-open" : ""}`}
